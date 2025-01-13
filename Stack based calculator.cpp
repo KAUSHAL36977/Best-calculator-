@@ -3,6 +3,7 @@
 #include <string>
 #include <cmath>
 #include <cctype>
+#include <stdexcept> // For runtime_error
 
 using namespace std;
 
@@ -25,7 +26,9 @@ double applyOperator(double a, double b, char op) {
         case '+': return a + b;
         case '-': return a - b;
         case '*': return a * b;
-        case '/': return b != 0 ? a / b : throw runtime_error("Division by zero");
+        case '/': 
+            if (b == 0) throw runtime_error("Division by zero");
+            return a / b;
         case '^': return pow(a, b);
         default: throw runtime_error("Invalid operator");
     }
@@ -33,8 +36,8 @@ double applyOperator(double a, double b, char op) {
 
 // Function to evaluate an expression
 double evaluateExpression(const string& expression) {
-    stack<double> values; // Stack to store numbers
-    stack<char> operators; // Stack to store operators
+    stack<double> values;      // Stack to store numbers
+    stack<char> operators;     // Stack to store operators
 
     for (size_t i = 0; i < expression.length(); ++i) {
         char current = expression[i];
@@ -42,7 +45,7 @@ double evaluateExpression(const string& expression) {
         // Skip whitespace
         if (isspace(current)) continue;
 
-        // If the current character is a number
+        // If the current character is a number or decimal
         if (isdigit(current) || current == '.') {
             string num;
             while (i < expression.length() && (isdigit(expression[i]) || expression[i] == '.')) {
@@ -55,6 +58,7 @@ double evaluateExpression(const string& expression) {
         // If the current character is an operator
         else if (isOperator(current)) {
             while (!operators.empty() && precedence(operators.top()) >= precedence(current)) {
+                if (values.size() < 2) throw runtime_error("Invalid expression: insufficient operands.");
                 double b = values.top(); values.pop();
                 double a = values.top(); values.pop();
                 char op = operators.top(); operators.pop();
@@ -69,6 +73,7 @@ double evaluateExpression(const string& expression) {
         // If the current character is a closing parenthesis
         else if (current == ')') {
             while (!operators.empty() && operators.top() != '(') {
+                if (values.size() < 2) throw runtime_error("Invalid expression: insufficient operands.");
                 double b = values.top(); values.pop();
                 double a = values.top(); values.pop();
                 char op = operators.top(); operators.pop();
@@ -76,19 +81,26 @@ double evaluateExpression(const string& expression) {
             }
             if (!operators.empty() && operators.top() == '(') {
                 operators.pop(); // Remove '(' from the stack
+            } else {
+                throw runtime_error("Mismatched parentheses.");
             }
+        } else {
+            throw runtime_error("Invalid character in expression.");
         }
     }
 
     // Process remaining operators in the stack
     while (!operators.empty()) {
+        if (values.size() < 2) throw runtime_error("Invalid expression: insufficient operands.");
         double b = values.top(); values.pop();
         double a = values.top(); values.pop();
         char op = operators.top(); operators.pop();
         values.push(applyOperator(a, b, op));
     }
 
-    return values.top(); // The final result
+    // Final result should be the only value left in the stack
+    if (values.size() != 1) throw runtime_error("Invalid expression: too many values.");
+    return values.top();
 }
 
 int main() {
