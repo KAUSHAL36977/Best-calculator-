@@ -93,5 +93,24 @@ double evaluateExpression(const string& expression) {
 
 int main() {
     cout << "Stack-Based Scientific Calculator" << endl;
-    cout << "Enter a mathematical expression (or type
+    cout << "Enter a mathematical expression (or type 'exit' to quit):" << endl;
 
+    string input;
+    while (true) {
+        cout << "Expression: ";
+        getline(cin, input);
+        if (input == "exit") {
+            cout << "Exiting the calculator." << endl;
+            break;
+        }
+
+        try {
+            double result = evaluateExpression(input);
+            cout << "Result: " << result << endl;
+        } catch (const exception& e) {
+            cout << "Error: " << e.what() << endl;
+        }
+    }
+
+    return 0;
+}
