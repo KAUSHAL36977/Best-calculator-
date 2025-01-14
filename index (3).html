@@ -1,0 +1,56 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scientific Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-100 font-roboto">
+    <div class="container mx-auto p-4">
+        <div class="max-w-md mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="p-4">
+                <div class="flex justify-between items-center">
+                    <h1 class="text-2xl font-bold">Scientific Calculator</h1>
+                    <i class="fas fa-calculator text-2xl"></i>
+                </div>
+                <div class="mt-4">
+                    <input type="text" id="display" class="w-full p-2 text-right text-xl border border-gray-300 rounded" readonly>
+                </div>
+                <div class="grid grid-cols-4 gap-2 mt-4">
+                    <button class="p-4 bg-gray-200 rounded text-xl">7</button>
+                    <button class="p-4 bg-gray-200 rounded text-xl">8</button>
+                    <button class="p-4 bg-gray-200 rounded text-xl">9</button>
+                    <button class="p-4 bg-orange-400 text-white rounded text-xl">/</button>
+
+                    <button class="p-4 bg-gray-200 rounded text-xl">4</button>
+                    <button class="p-4 bg-gray-200 rounded text-xl">5</button>
+                    <button class="p-4 bg-gray-200 rounded text-xl">6</button>
+                    <button class="p-4 bg-orange-400 text-white rounded text-xl">*</button>
+
+                    <button class="p-4 bg-gray-200 rounded text-xl">1</button>
+                    <button class="p-4 bg-gray-200 rounded text-xl">2</button>
+                    <button class="p-4 bg-gray-200 rounded text-xl">3</button>
+                    <button class="p-4 bg-orange-400 text-white rounded text-xl">-</button>
+
+                    <button class="p-4 bg-gray-200 rounded text-xl">0</button>
+                    <button class="p-4 bg-gray-200 rounded text-xl">.</button>
+                    <button class="p-4 bg-gray-200 rounded text-xl">C</button>
+                    <button class="p-4 bg-orange-400 text-white rounded text-xl">+</button>
+
+                    <button class="p-4 bg-gray-200 rounded text-xl">sin</button>
+                    <button class="p-4 bg-gray-200 rounded text-xl">cos</button>
+                    <button class="p-4 bg-gray-200 rounded text-xl">tan</button>
+                    <button class="p-4 bg-orange-400 text-white rounded text-xl">=</button>
+
+                    <button class="p-4 bg-gray-200 rounded text-xl">log</button>
+                    <button class="p-4 bg-gray-200 rounded text-xl">ln</button>
+                    <button class="p-4 bg-gray-200 rounded text-xl">√</button>
+                    <button class="p-4 bg-gray-200 rounded text-xl">^</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
